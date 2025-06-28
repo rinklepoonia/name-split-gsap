@@ -155,7 +155,6 @@ const Practice = () => {
         dragging.current = false;
         const dragBigFlower = bigFlowerRef.current;
 
-
         gsap.set(dragBigFlower, {
             opacity: 0,
             rotate: gsap.utils.random(-180, 180),
