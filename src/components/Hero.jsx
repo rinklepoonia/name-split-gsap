@@ -250,24 +250,6 @@ const Hero = () => {
                             gsap.to(burstFlower, {
                                 y: "+=400",
                                 duration: 0.1,
-                                // onUpdate: () => {
-                                //     // Check if flower is outside hero bounds
-                                //     const flowerRect = burstFlower.getBoundingClientRect();
-                                //     if (flowerRect.top > heroRect.bottom ||
-                                //         flowerRect.bottom < heroRect.top ||
-                                //         flowerRect.left > heroRect.right ||
-                                //         flowerRect.right < heroRect.left) {
-                                //         // Flower is outside hero bounds, make it disappear
-                                //         gsap.to(burstFlower, {
-                                //             opacity: 0,
-                                //             scale: 0.2,
-                                //             duration: 0.3,
-                                //             onComplete: () => {
-                                //                 burstFlower.remove();
-                                //             }
-                                //         });
-                                //     }
-                                // },
                                 onComplete: () => {
                                     // Fallback: if still inside bounds after animation, remove anyway
                                     if (burstFlower.parentNode) {

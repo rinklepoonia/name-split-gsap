@@ -105,21 +105,28 @@ const Practice = () => {
 
     // 🌼 DRAG INTERACTIONS
     const handlePointerDown = (e) => {
+        dragging.current = true;
         const heroRect = e.currentTarget.getBoundingClientRect();
         const dragBigFlower = bigFlowerRef.current;
+        const dragLine = lineRef.current;
         const relativeX = e.clientX - heroRect.left;
         const relativeY = e.clientY - heroRect.top;
+        const randomImage = FLOWER_IMAGES[Math.floor(Math.random() * FLOWER_IMAGES.length)];
+        currentDragImage.current = randomImage;
+        dragBigFlower.src = randomImage;
         gsap.set(dragBigFlower, {
             left: relativeX - 45,
             top: relativeY - 45,
             opacity: 1,
         });
+
         dragStart.current = { x: relativeX, y: relativeY };
     };
 
     const handlePointerMove = (e) => {
         if (!dragging.current) return;
         const heroRect = e.currentTarget.getBoundingClientRect();
+        const dragLine = lineRef.current;
         const currentRelativeX = e.clientX - heroRect.left;
         const currentRelativeY = e.clientY - heroRect.top;
         const startX = dragStart.current.x;
@@ -128,22 +135,81 @@ const Practice = () => {
         const dy = currentRelativeY - startY;
         const dist = Math.sqrt(dx * dx + dy * dy);
         const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
         gsap.set(dragLine, {
+            left: startX,
+            top: startY,
             width: dist,
             opacity: 1,
             rotate: angle,
-        })
+            transformOrigin: "0 50%",
+        });
+
+        const dragBigFlower = bigFlowerRef.current;
+        gsap.set(dragBigFlower, {
+            scale: 1 + dist / 600,
+        });
     }
 
     const handlePointerUp = (e) => {
+        dragging.current = false;
         const dragBigFlower = bigFlowerRef.current;
+
+
         gsap.set(dragBigFlower, {
             opacity: 0,
+            rotate: gsap.utils.random(-180, 180),
         });
         const dragLine = lineRef.current
         gsap.set(dragLine, {
             opacity: 0,
         })
+
+        const burstFlowers = Array.from({ length: 8 }).map((_, i) => {
+            const burstFlower = document.createElement('img');
+            burstFlower.src = FLOWER_IMAGES[Math.floor(Math.random() * FLOWER_IMAGES.length)];
+            burstFlower.className = 'burst-flower absolute pointer-events-none z-30';
+            burstFlower.style.cssText = `
+                width: ${Math.floor(Math.random() * 30 + 20)}px;
+                height: ${Math.floor(Math.random() * 30 + 20)}px;
+                object-fit: contain;
+                position: absolute;
+                left: ${dragStart.current.x}px;
+                top: ${dragStart.current.y}px;
+                opacity: 0;
+                transform: scale(0.5);
+            `;
+
+            document.getElementById('hero').appendChild(burstFlower);
+
+            gsap.fromTo(burstFlower,
+                {
+                    opacity: 0,
+                    scale: 0.5,
+                    x: 0,
+                    y: 0,
+                },
+                {
+                    opacity: () => gsap.utils.random(0.6, 1),
+                    scale: () => gsap.utils.random(0.4, 1.2),
+                    x: () => gsap.utils.random(-window.innerWidth / 4, window.innerWidth / 4),
+                    y: () => gsap.utils.random(-window.innerHeight / 4, window.innerHeight / 4),
+                    scale: 1.5,
+                    onComplete: () => {
+                        gsap.to(burstFlower, {
+                            y: "+=400",
+                            onComplete: () => {
+                                if (burstFlower.parentNode) {
+                                    burstFlower.remove();
+                                }
+                            }
+                        });
+                    }
+                }
+            );
+
+            return burstFlower;
+        });
     }
 
 
