@@ -313,7 +313,7 @@ const Hero = () => {
             {/* Big drag flower */}
             <img
                 ref={bigFlowerRef}
-                src="/assets/images/png/img-6.png"
+                src="/assets/images/webp/img-6.webp"
                 alt="big-flower"
                 className="pointer-events-none absolute z-50"
                 style={{
