@@ -53,8 +53,7 @@ const Practice = () => {
             y: () => gsap.utils.random(-window.innerHeight / 2, window.innerHeight / 2),
             rotate: () => gsap.utils.random(-360, 360),
             duration: 0.3,
-        }).to(
-            ".flower",
+        }).to(".flower",
             {
                 opacity: 0,
                 scale: 0.2,
@@ -79,16 +78,9 @@ const Practice = () => {
             },
         });
 
-        tl.fromTo(
-            devSplit.chars,
-            {
-                autoAlpha: 0,
-                opacity: 0,
-                x: () => gsap.utils.random(-10, 10),
-            },
+        tl.to(devSplit.chars,
             {
                 y: "320px",
-                autoAlpha: 1,
                 opacity: 1,
                 stagger: {
                     each: 0.09,
@@ -108,7 +100,6 @@ const Practice = () => {
         dragging.current = true;
         const heroRect = e.currentTarget.getBoundingClientRect();
         const dragBigFlower = bigFlowerRef.current;
-        const dragLine = lineRef.current;
         const relativeX = e.clientX - heroRect.left;
         const relativeY = e.clientY - heroRect.top;
         const randomImage = FLOWER_IMAGES[Math.floor(Math.random() * FLOWER_IMAGES.length)];
@@ -119,7 +110,6 @@ const Practice = () => {
             top: relativeY - 45,
             opacity: 1,
         });
-
         dragStart.current = { x: relativeX, y: relativeY };
     };
 
@@ -204,13 +194,10 @@ const Practice = () => {
                             }
                         });
                     }
-                }
-            );
-
+                });
             return burstFlower;
         });
     }
-
 
 
     return (
