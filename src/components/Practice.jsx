@@ -20,6 +20,7 @@ const Practice = () => {
     const bigFlowerRef = useRef(null);
     const lineRef = useRef(null);
     const dragging = useRef(false);
+    const rockingHandRef = useRef(null);
 
     const dragStart = useRef({ x: 0, y: 0 });
 
@@ -111,6 +112,7 @@ const Practice = () => {
             opacity: 1,
         });
         dragStart.current = { x: relativeX, y: relativeY };
+        document.body.style.cursor = 'url("/assets/images/svg/dragCursor.svg"), auto';
     };
 
     const handlePointerMove = (e) => {
@@ -144,6 +146,21 @@ const Practice = () => {
     const handlePointerUp = (e) => {
         dragging.current = false;
         const dragBigFlower = bigFlowerRef.current;
+        const rockingHand = rockingHandRef.current;
+        document.body.style.cursor = 'none';
+        gsap.set(rockingHand, {
+            left: e.clientX - 25,
+            top: e.clientY - 25,
+            opacity: 1,
+        });
+        
+        setTimeout(() => {
+            gsap.set(rockingHand, {
+                opacity: 0,
+            });
+            document.body.style.cursor = 'url("/assets/images/svg/dragCursor.svg"), auto';
+        }, 500);
+
 
         gsap.set(dragBigFlower, {
             opacity: 0,
@@ -211,7 +228,7 @@ const Practice = () => {
         >
             <p id="text" className="text-[150px] font-semibold text-blue-300">Pricing</p>
             <p id="developerText" className="text-[150px] font-semibold text-blue-300 absolute top-[-19%]">Free</p>
-            {/* <p className="text-base  text-white mt-80 max-w-[300px] text-center">You heard us right. GSAP is now 100% free for all users, thanks to Webflow’s support.</p> */}
+            {/* <p className="text-base  text-white mt-80 max-w-[300px] text-center">You heard us right. GSAP is now 100% free for all users, thanks to Webflow's support.</p> */}
             {/* Flowers */}
             {flowers.map(({ src, size, key }) => (
                 <img
@@ -255,6 +272,23 @@ const Practice = () => {
                     backgroundSize: "10px 2px",
                     backgroundRepeat: "repeat-x",
                     opacity: 0,
+                }}
+            />
+
+            {/* Rocking hand image */}
+            <img
+                ref={rockingHandRef}
+                src="/assets/images/svg/rocking-hand.svg"
+                alt="rocking-hand"
+                className="pointer-events-none absolute z-60 rocking-hand-shake"
+                style={{
+                    width: "30px",
+                    height: "30px",
+                    opacity: 0,
+                    objectFit: "contain",
+                    position: "absolute",
+                    left: "0px",
+                    top: "0px",
                 }}
             />
         </div>

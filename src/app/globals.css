@@ -2,8 +2,32 @@
 
 body {
     overflow: hidden;
-    cursor: url("/assets/images/svg/dragCursor.svg"), auto !important;
+    cursor: url("/assets/images/svg/dragCursor.svg"), auto;
 }
+
+.rocking-hand-shake {
+    animation: rockingHandShake 200ms ease-in-out infinite;
+}
+
+@keyframes rockingHandShake {
+    0% {
+        transform: translateX(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateX(-5px) rotate(-5deg);
+    }
+
+    75% {
+        transform: translateX(5px) rotate(5deg);
+    }
+
+    100% {
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
+
 
 @theme inline {
     --background-hero: url("/assets/images/png/hero-bg.png")
@@ -17,7 +41,7 @@ body {
     background-size: 100% 100%;
 }
 
-.auroraFlow-animate {
+/* .auroraFlow-animate {
     animation: auroraFlow 8s linear infinite;
 }
 
@@ -27,7 +51,9 @@ body {
 
 .blobify-animation {
     animation: blobify 8s linear infinite;
-}
+} */
+
+
 
 @keyframes auroraFlow {
     0% {
