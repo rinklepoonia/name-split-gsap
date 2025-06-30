@@ -149,8 +149,8 @@ const Practice = () => {
         const rockingHand = rockingHandRef.current;
         document.body.style.cursor = 'none';
         gsap.set(rockingHand, {
-            left: e.clientX - 25,
-            top: e.clientY - 25,
+            left: e.clientX,
+            top: e.clientY,
             opacity: 1,
         });
         
