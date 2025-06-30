@@ -127,7 +127,7 @@ const Practice = () => {
         const dy = currentRelativeY - startY;
         const dist = Math.sqrt(dx * dx + dy * dy);
         const angle = Math.atan2(dy, dx) * (180 / Math.PI);
-
+        document.body.style.cursor = 'url("/assets/images/svg/hand-blue-ellipse.svg"), auto';
         gsap.set(dragLine, {
             left: startX,
             top: startY,
@@ -172,7 +172,7 @@ const Practice = () => {
             opacity: 0,
         })
 
-        const burstFlowers = Array.from({ length: 8 }).map((_, i) => {
+        const burstFlowers = Array.from({ length: 15 }).map((_, i) => {
             const burstFlower = document.createElement('img');
             burstFlower.src = FLOWER_IMAGES[Math.floor(Math.random() * FLOWER_IMAGES.length)];
             burstFlower.className = 'burst-flower absolute pointer-events-none z-30';
