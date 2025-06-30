@@ -203,7 +203,7 @@ const Practice = () => {
                     scale: 1.5,
                     onComplete: () => {
                         gsap.to(burstFlower, {
-                            y: "+=400",
+                            y: "+=2000",
                             onComplete: () => {
                                 if (burstFlower.parentNode) {
                                     burstFlower.remove();
