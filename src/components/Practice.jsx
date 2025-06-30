@@ -152,8 +152,9 @@ const Practice = () => {
             left: e.clientX,
             top: e.clientY,
             opacity: 1,
+            ease: "bounce.out",
         });
-        
+
         setTimeout(() => {
             gsap.set(rockingHand, {
                 opacity: 0,

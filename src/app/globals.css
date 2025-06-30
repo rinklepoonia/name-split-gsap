@@ -6,7 +6,7 @@ body {
 }
 
 .rocking-hand-shake {
-    animation: rockingHandShake 160ms linear infinite;
+    animation: rockingHandShake 130ms linear infinite;
 }
 
 @keyframes rockingHandShake {
