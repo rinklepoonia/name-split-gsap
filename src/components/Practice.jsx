@@ -211,7 +211,7 @@ const Practice = () => {
         >
             <p id="text" className="text-[150px] font-semibold text-blue-300">Pricing</p>
             <p id="developerText" className="text-[150px] font-semibold text-blue-300 absolute top-[-19%]">Free</p>
-
+            {/* <p className="text-base  text-white mt-80 max-w-[300px] text-center">You heard us right. GSAP is now 100% free for all users, thanks to Webflow’s support.</p> */}
             {/* Flowers */}
             {flowers.map(({ src, size, key }) => (
                 <img
