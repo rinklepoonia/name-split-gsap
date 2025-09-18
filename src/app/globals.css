@@ -30,11 +30,15 @@ body {
 
 
 @theme inline {
-    --background-hero: url("/assets/images/png/hero-bg.png")
+    --background-hero: url("/assets/images/png/hero-bg.png");
+    --background-hero-gsap-field: url("/assets/images/webp/gsap-field-bg.webp")
 }
 
 .bg-hero {
     background-image: var(--background-hero);
+}
+.bg-hero-gsap-field {
+    background-image: var(--background-hero-gsap-field);
 }
 
 .bg-full {
